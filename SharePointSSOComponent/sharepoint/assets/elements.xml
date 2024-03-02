@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Elements xmlns="http://schemas.microsoft.com/sharepoint/">
-    <CustomAction Title="PvaSso" Location="ClientSideExtension.ApplicationCustomizer" ClientSideComponentId="bbcf8287-ea2d-4bb6-868f-19b9cf4b0812" ClientSideComponentProperties="{&quot;botURL&quot;:&quot;https://default6c94075ada0a4c6a8411badf652e8b.53.environment.api.powerplatform.com/powervirtualagents/botsbyschema/cr1e3_hrCopilotSso/directline/token?api-version=2022-03-01-preview&quot;,&quot;customScope&quot;:&quot;api://botid-d10c7b90-a49b-4f79-88ba-68e1e187dd68/HR.Read&quot;,&quot;clientID&quot;:&quot;cda6810a-3c18-4b4a-8b59-185edfe2c347&quot;,&quot;authority&quot;:&quot;https://login.microsoftonline.com/common&quot;,&quot;greet&quot;:true,&quot;buttonLabel&quot;:&quot;Custom Copilot&quot;,&quot;botName&quot;:&quot;HR Copilot - SSO&quot;}">
+    <CustomAction
+        Title="PvaSso"
+        Location="ClientSideExtension.ApplicationCustomizer"
+        ClientSideComponentId="bbcf8287-ea2d-4bb6-868f-19b9cf4b0812"
+        ClientSideComponentProperties="{&quot;botURL&quot;:&quot;YOUR_BOT_URL&quot;,&quot;customScope&quot;:&quot;YOUR_CUSTOM_SCOPE&quot;,&quot;clientID&quot;:&quot;YOU_CLIENT_ID&quot;,&quot;authority&quot;:&quot;YOUR_AAD_LOGIN_URL&quot;,&quot;greet&quot;:TRUE_OR_FALSE,&quot;buttonLabel&quot;:&quot;CHAT_BUTTON_LABEL&quot;,&quot;botName&quot;:&quot;BOT_NAME&quot;}">
     </CustomAction>
 </Elements>

@@ -52,9 +52,9 @@ When configuring the canvas app registration, pay attention to the following det
 
 1. When adding a platform to the canvas app registration, select “Single-page application” and not “Web”. Web redirect URIs only support the implicit grant flow for authentication, which is considered less secure and cannot be used with MSAL.js 2.x, which is the authentication library included in the code sample provided here. For a discussion about the differences between Web and SPA redirects, please refer to: [https://github.com/MicrosoftDocs/azure-docs/issues/70484#issuecomment-791077654](https://github.com/MicrosoftDocs/azure-docs/issues/70484#issuecomment-791077654)
 
-2. The redirect URI should be the same as the URL for your SharePoint site that will host the copilot. For example, if you plan to deploy the copilot on <https://mytenant.sharepoint.com/sites/MySite>, set this as your redirect URI.
+2. The redirect URI should be the same as the URL of the SharePoint site that will host the copilot. For example, if you plan to deploy the copilot on <https://mytenant.sharepoint.com/sites/MySite>, set this as your redirect URI.
 
-   **Important:** Users can reach your SharePoint site via addresses that include trailing slashes. Since redirect URIs are sensitive to this variation, consider creating two redirect URIs representing the same site, with and without a trailing slash (for example: <https://mytenant.sharepoint.com/sites/MySite> and <https://mytenant.sharepoint.com/sites/MySite/>) 
+   **Important:** Users can reach your SharePoint site via addresses that include trailing slashes. Since redirect URIs are sensitive to this variation, consider creating two redirect URIs representing the same site, with and without a trailing slash (for example: <https://mytenant.sharepoint.com/sites/MySite> and <https://mytenant.sharepoint.com/sites/MySite/>). Your end users will also reach your SharePoint site via the home page of the site. As such, you should register the URL of the home page of your site as a redirect URI, too. For example if the home page URL is <https://mytenant.sharepoint.com/sites/MySite/SitePages/CollabHome.aspx>, set this as an additional redirect URI. 
 
 3. The canvas app registration will need permissions for the custom API that was configured in *Step 1*. To add this permission, select an API from “APIs my organization uses” and search for the name you have given your copilot app registration in *Step 1*. For example, if your copilot app registration is called “SharePoint Bot Authentication” search for that name in the list of APIs, and select your custom scope (a name for your custom scope has been selected while configuring a custom API for your copilot app registration)
 
@@ -101,7 +101,7 @@ When configuring the canvas app registration, pay attention to the following det
 
 1. Locate elements.xml under SharePointSSOComponent/sharepoint/assets, and update the values in the file, using one of the two following options:
 
-   *Option 1*: run the following python script and provide values based values from Steps 1 & 2 
+   *Option 1*: before building, packaging, and deploying the solution, run the following python script and provide values based values from Steps 1 & 2 
    
    ```python
    python .\populate_elements_xml.py
@@ -112,7 +112,11 @@ When configuring the canvas app registration, pay attention to the following det
     ```xml
     ClientSideComponentProperties=="{&quot;botURL&quot;:&quot;YOUR_BOT_URL&quot;,&quot;customScope&quot;:&quot;YOUR_CUSTOM_SCOPE&quot;,&quot;clientID&quot;:&quot;YOU_CLIENT_ID&quot;,&quot;authority&quot;:&quot;YOUR_AAD_LOGIN_URL&quot;,&quot;greet&quot;:TRUE_OR_FALSE,&quot;buttonLabel&quot;:&quot;CHAT_BUTTON_LABEL&quot;,&quot;botName&quot;:&quot;BOT_NAME&quot;}"
     ```
+    *Option 3*: build, package, and deploy the solution. Then run the following PowerShell script and provide values based values from Steps 1 & 2 
 
+   ```PowerShell
+   .\Configure-McsForSite.ps1 -siteUrl "<siteUrl>" -botUrl "<botUrl>" -botName "<botName>" -customScope "<customScope>" -clientId "<clientId>" -authority "<authority>" -buttonLabel "<buttonLabel>"
+   ```
 
     ### Property details
 
@@ -146,7 +150,7 @@ When configuring the canvas app registration, pay attention to the following det
 
 ## Step 4 – Upload the component to SharePoint
 
-1. Follow the instructions in [Manage apps using the Apps site - SharePoint - SharePoint in Microsoft 365 | Microsoft Learn](https://learn.microsoft.com/en-us/sharepoint/use-app-catalog#add-custom-apps) to upload the sppkg file using your SharePoint admin center. 
+1. Follow the instructions in [Manage apps using the Apps site - SharePoint - SharePoint in Microsoft 365 | Microsoft Learn](https://learn.microsoft.com/en-us/sharepoint/use-app-catalog#add-custom-apps) to upload the sppkg file using your SharePoint admin center. Don't make the solution tenant-wide available, rather deploy it in any target site where you want to use it.
 
    Once the app has been successfully uploaded and enabled, it will be visible under “Apps for SharePoint”
 
